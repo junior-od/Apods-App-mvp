@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.mvpplayaround.ui.ouruniverse.OurUniverseFragment"
+        android:label="@string/our_universe_label"
+        tools:layout="@layout/fragment_our_universe">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_errorDialog"
+            app:destination="@id/errorDialog"
+            />
+        <action
+            android:id="@+id/action_FirstFragment_to_PodDetailsFragment"
+            app:destination="@id/PodDetailsFragment" />
+
+
+    </fragment>
+    <dialog
+        tools:layout="@layout/fragment_error_dialog"
+        android:name="com.example.mvpplayaround.ui.error.ErrorDialogFragment"
+        android:id="@+id/errorDialog"
+        android:label="ErrorDialog" >
+
+        <action
+            android:id="@+id/action_errorDialog_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/PodDetailsFragment"
+        android:name="com.example.mvpplayaround.ui.poddetails.PodDetailsFragment"
+        tools:layout="@layout/fragment_pod_details">
+        <argument
+            android:name="favourite"
+            app:argType="boolean"
+            />
+        <argument
+            android:name="pod"
+            app:argType="com.example.mvpplayaround.data.remote.models.AstronomyPicture" />
+    </fragment>
+
+
+</navigation>

@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AppTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="android:windowFullscreen">true</item>
+        <!-- Text -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.AppTheme.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.AppTheme.HeadLine2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.AppTheme.Headline3</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.AppTheme.Body</item>
+
+        <!-- Buttons -->
+        <item name="buttonStyle">@style/TextAppearance.AppTheme.Button</item>
+    </style>
+</resources>
