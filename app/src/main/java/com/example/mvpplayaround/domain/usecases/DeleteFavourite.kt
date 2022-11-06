@@ -1,4 +1,4 @@
-package com.example.mvpplayaround.data.usecases
+package com.example.mvpplayaround.domain.usecases
 
 import com.example.mvpplayaround.data.remote.models.AstronomyPicture
 import com.example.mvpplayaround.data.repository.FavouriteDatabaseRepository

@@ -5,10 +5,10 @@ import androidx.room.Room
 import com.example.mvpplayaround.data.local.source.FavouriteAstronomyPictureDatabase
 import com.example.mvpplayaround.data.repository.FavouriteDatabaseRepository
 import com.example.mvpplayaround.data.repository.FavouriteDatabaseRepositoryImpl
-import com.example.mvpplayaround.data.usecases.DeleteFavourite
-import com.example.mvpplayaround.data.usecases.FavouriteDbUseCases
-import com.example.mvpplayaround.data.usecases.GetFavourite
-import com.example.mvpplayaround.data.usecases.InsertFavourite
+import com.example.mvpplayaround.domain.usecases.DeleteFavourite
+import com.example.mvpplayaround.domain.usecases.FavouriteDbUseCases
+import com.example.mvpplayaround.domain.usecases.GetFavourite
+import com.example.mvpplayaround.domain.usecases.InsertFavourite
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

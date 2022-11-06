@@ -1,7 +1,7 @@
 package com.example.mvpplayaround.di
 
 import com.example.mvpplayaround.data.repository.PlanetaryRepoImpl
-import com.example.mvpplayaround.data.usecases.FavouriteDbUseCases
+import com.example.mvpplayaround.domain.usecases.FavouriteDbUseCases
 import com.example.mvpplayaround.ui.ouruniverse.OurUniversePresenter
 import com.example.mvpplayaround.ui.poddetails.PodDetailsPresenter
 import com.example.mvpplayaround.util.DispatcherProviders
