@@ -198,10 +198,8 @@ class OurUniverseFragment : Fragment(), OurUniverseContract.View, PodsRecyclerAd
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
-
         ourUniversePresenter.onDestroy()
-
+        _binding = null
     }
 
     private fun goToPodDetails(isFavourite: Boolean, pod: AstronomyPicture) {

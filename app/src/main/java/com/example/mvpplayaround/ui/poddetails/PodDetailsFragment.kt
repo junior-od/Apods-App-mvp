@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PodDetailsFragment : Fragment() {
+class PodDetailsFragment : Fragment(), PodsDetailsContract.View {
     private var _binding: FragmentPodDetailsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -43,6 +43,8 @@ class PodDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        podDetailsPresenter.onViewCreated(this)
 
         isPodFavourite = args.favourite
 
@@ -99,6 +101,8 @@ class PodDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        podDetailsPresenter.onDestroy()
         _binding = null
+
     }
 }
