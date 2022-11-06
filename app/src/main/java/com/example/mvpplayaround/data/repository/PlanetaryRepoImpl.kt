@@ -1,6 +1,6 @@
 package com.example.mvpplayaround.data.repository
 
-import com.example.mvpplayaround.data.mappers.AstronomyPictureMapper
+import com.example.mvpplayaround.domain.mappers.AstronomyPictureMapper
 import com.example.mvpplayaround.data.remote.PlanetaryService
 import com.example.mvpplayaround.data.remote.models.AstronomyPicture
 import com.example.mvpplayaround.util.NetworkResource

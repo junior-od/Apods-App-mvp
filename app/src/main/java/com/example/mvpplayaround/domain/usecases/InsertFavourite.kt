@@ -1,6 +1,6 @@
-package com.example.mvpplayaround.data.usecases
+package com.example.mvpplayaround.domain.usecases
 
-import com.example.mvpplayaround.data.mappers.FavouriteAstronomyPictureEntMapper
+import com.example.mvpplayaround.domain.mappers.FavouriteAstronomyPictureEntMapper
 import com.example.mvpplayaround.data.remote.models.AstronomyPicture
 import com.example.mvpplayaround.data.repository.FavouriteDatabaseRepository
 

@@ -2,7 +2,7 @@ package com.example.mvpplayaround.ui.ouruniverse
 
 import com.example.mvpplayaround.data.remote.models.AstronomyPicture
 import com.example.mvpplayaround.data.repository.PlanetaryRepoImpl
-import com.example.mvpplayaround.data.usecases.FavouriteDbUseCases
+import com.example.mvpplayaround.domain.usecases.FavouriteDbUseCases
 import com.example.mvpplayaround.ui.base.BasePresenter
 import com.example.mvpplayaround.util.Constants
 import com.example.mvpplayaround.util.DispatcherProviders

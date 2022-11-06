@@ -1,4 +1,4 @@
-package com.example.mvpplayaround.data.mappers
+package com.example.mvpplayaround.domain.mappers
 
 import com.example.mvpplayaround.data.local.model.FavouriteAstronomyPictureEntity
 import com.example.mvpplayaround.data.remote.models.AstronomyPicture

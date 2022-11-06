@@ -1,4 +1,4 @@
-package com.example.mvpplayaround.data.usecases
+package com.example.mvpplayaround.domain.usecases
 
 data class FavouriteDbUseCases(
     val getFavouriteUseCase: GetFavourite,
