@@ -6,6 +6,7 @@ import com.example.mvpplayaround.MockResponseFileReader
 import com.example.mvpplayaround.TestServiceGenerator
 import com.example.mvpplayaround.data.local.model.FavouriteAstronomyPictureEntity
 import com.example.mvpplayaround.data.remote.PlanetaryService
+import com.example.mvpplayaround.data.remote.models.AstronomyPicture
 import com.example.mvpplayaround.data.repository.FavouriteDatabaseRepository
 import com.example.mvpplayaround.data.repository.FavouriteDatabaseRepositoryImplTest
 import com.example.mvpplayaround.data.repository.PlanetaryRepoImpl
@@ -13,6 +14,7 @@ import com.example.mvpplayaround.domain.usecases.DeleteFavourite
 import com.example.mvpplayaround.domain.usecases.FavouriteDbUseCases
 import com.example.mvpplayaround.domain.usecases.GetFavourite
 import com.example.mvpplayaround.domain.usecases.InsertFavourite
+import com.example.mvpplayaround.util.Constants
 import com.example.mvpplayaround.util.DispatcherProviders
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.CoroutineDispatcher
@@ -34,7 +36,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)
-internal class OurUniversePresenterTest {
+class OurUniversePresenterTest {
 
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
@@ -67,7 +69,6 @@ internal class OurUniversePresenterTest {
 
     @Before
     fun setUp() {
-//        MockitoAnnotations.initMocks(this)
         //mock server behaviour
         server = MockWebServer()
 
@@ -175,7 +176,7 @@ internal class OurUniversePresenterTest {
         ourUniversePresenter.fetchLatestPods()
 
         //delay to wait for coroutine stuff to run completely
-        delay(50)
+        delay(20)
 
         verify(view, times(1)).loading(anyBoolean())
         verify(view, times(1)).onErrorOccurred()
@@ -197,8 +198,8 @@ internal class OurUniversePresenterTest {
 
         ourUniversePresenter.fetchLatestPods()
 
-        //delay to wait for coroutine stuff to run completely
-        delay(50)
+//        //delay to wait for coroutine stuff to run completely
+        delay(20)
 
         verify(view, times(1)).loading(anyBoolean())
         verify(view, times(1)).getLatestPodsAndFavouritePods(anyList(), anyList())
@@ -210,12 +211,110 @@ internal class OurUniversePresenterTest {
      * to view
      * */
     @Test
-    fun `pin favourite to view is successful`() = runBlocking {
+    fun `pin favourite to view is successful`() {
         ourUniversePresenter.pinFavorite()
 
         //delay to wait for coroutine stuff to run completely
-        delay(50)
+//        delay(50)
 
         verify(view, times(1)).getLatestPodsAndFavouritePods(anyList(), anyList())
+    }
+
+    /**
+     * test to apply appropriate filter
+     * */
+
+    @Test
+    fun `apply appropriate filter return filter by date`() {
+
+        ourUniversePresenter.applyFilter(Constants.PodsFilter.DATE)
+
+        assertThat(ourUniversePresenter.getFilterBy()).isEqualTo(Constants.PodsFilter.DATE)
+        verify(view, times(1)).getLatestPodsAndFavouritePods(anyList(), anyList())
+    }
+
+    /**
+     *test to ensure filter by Title in ascending order
+     * returns correct result
+     * */
+
+    @Test
+    fun `filter by Title in ascending order returns correct result`(){
+
+        //test data
+        val data = mutableListOf<AstronomyPicture>()
+        data.add(AstronomyPicture(
+            "Stars",
+            "Shine brighter than diamonds",
+            "2022-10-11",
+            "http://someurl",
+            "image",
+        ))
+
+        data.add(AstronomyPicture(
+            "Zari Moon",
+            "Moon brighter than diamonds",
+            "2009-10-11",
+            "http://someurlmoon",
+            "image",
+        ))
+
+        data.add(AstronomyPicture(
+            "Aba Sun",
+            "Sun brighter than diamonds",
+            "2021-01-11",
+            "http://someurlsun",
+            "image",
+        ))
+
+        data.shuffle()
+
+        val result = ourUniversePresenter.addFilter(data, Constants.PodsFilter.TITLE)
+
+        for (i in 0..result.size - 2) {
+            assertThat(result[i].title <= result[i+1].title ).isTrue()
+        }
+    }
+
+
+    /**
+     *test to ensure filter by Date in descending order
+     * returns correct result
+     * */
+    @Test
+    fun `filter by Date in descending order returns correct result`(){
+        //test data
+        val data = mutableListOf<AstronomyPicture>()
+        data.add(AstronomyPicture(
+            "Stars",
+            "Shine brighter than diamonds",
+            "2022-10-11",
+            "http://someurl",
+            "image",
+        ))
+
+        data.add(AstronomyPicture(
+            "Zari Moon",
+            "Moon brighter than diamonds",
+            "2009-10-11",
+            "http://someurlmoon",
+            "image",
+        ))
+
+        data.add(AstronomyPicture(
+            "Aba Sun",
+            "Sun brighter than diamonds",
+            "2021-01-11",
+            "http://someurlsun",
+            "image",
+        ))
+
+        data.shuffle()
+
+        val result = ourUniversePresenter.addFilter(data, Constants.PodsFilter.DATE)
+
+        for (i in 0..result.size - 2){
+            assertThat(result[i].date >= result[i+1].date)
+        }
     }
 }
