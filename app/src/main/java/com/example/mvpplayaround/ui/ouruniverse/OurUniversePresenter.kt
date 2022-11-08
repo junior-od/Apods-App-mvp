@@ -26,7 +26,7 @@ class OurUniversePresenter @Inject constructor(private val  planetaryRepoImpl: P
         return podUseCases.getFavouriteUseCase(filterBy).toMutableList()
     }
 
-    private fun addFilter(list: List<AstronomyPicture>, filterSet: Constants.PodsFilter): List<AstronomyPicture>{
+    fun addFilter(list: List<AstronomyPicture>, filterSet: Constants.PodsFilter): List<AstronomyPicture>{
         return when (filterSet) {
             Constants.PodsFilter.TITLE -> {
                 list.sortedBy { it.title.lowercase() }
