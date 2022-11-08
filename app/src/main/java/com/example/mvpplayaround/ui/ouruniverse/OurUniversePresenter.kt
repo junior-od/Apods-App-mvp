@@ -70,27 +70,33 @@ class OurUniversePresenter @Inject constructor(private val  planetaryRepoImpl: P
     override fun fetchLatestPods() {
        view?.loading(true)
 
-       getPodsJob?.cancel()
+        getPodsJob?.cancel()
+        getPodsJob = CoroutineScope(dispatchers.io).launch {
+        when (val response = getPodsFromApi()) {
+                is NetworkResource.Error -> {
 
-       getPodsJob = CoroutineScope(dispatchers.io).launch {
-           when (val response = planetaryRepoImpl.getPods()) {
-               is NetworkResource.Error -> {
+                    withContext(dispatchers.main){
+                        view?.onErrorOccurred()
+                    }
+                }
 
-                   withContext(dispatchers.main){
-                       view?.onErrorOccurred()
-                   }
-               }
+                is NetworkResource.Success -> {
+                    tempLatestPods =  response.data?.toMutableList() ?: ArrayList()
 
-               is NetworkResource.Success -> {
-                   tempLatestPods =  response.data?.toMutableList() ?: ArrayList()
+                    updateLatestAndFavouritesState()
 
-                   updateLatestAndFavouritesState()
+                }
+            }
 
-               }
-           }
+        }
 
-       }
     }
+
+    suspend fun getPodsFromApi(): NetworkResource<List<AstronomyPicture>>{
+          return planetaryRepoImpl.getPods()
+    }
+
+
 
     override fun pinFavorite() {
 
